@@ -13,7 +13,7 @@ def get_saved_items(user_id, access_token):
     headers = {'Authorization' : 'OAuth ' + access_token}
     url = 'https://cloud.feedly.com/v3/streams/contents?streamId=user/' + user_id + '/tag/global.saved&count=10000'
 
-    print('Requesting saved items…')
+    print('Requesting saved items')
     r = requests.get(url, headers = headers)
 
     if r.status_code == 200:
@@ -22,10 +22,11 @@ def get_saved_items(user_id, access_token):
         # filename = 'feedly-saved-' + time.strftime("%Y%m%d-%H%M%S") + '.json'
         r.encoding = 'UTF-8'
 
-        # Write JSON
+        # Write compact JSON
+        # Replace 'separators' argument with 'indent=4' if you don’t want it minified
         with io.open(filename, 'w', encoding='UTF-8') as output_file:
           try:
-            json.dump(r.json(), output_file, indent=4)
+            json.dump(r.json(), output_file, separators=(',',':'))
             print('Success: Created ' + filename)
           except ValueError as error:
             print(error)

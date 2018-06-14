@@ -28,6 +28,34 @@
       height: 100%;
     }
 
+    .content-container {
+      max-width: 45em;
+      margin: 0 auto;
+    }
+
+    .text-gray { color: #999; }
+
+
+    /* Article list */
+
+    .list {
+      max-width: 45em;
+      margin: 0 auto;
+      padding-left: 0;
+    }
+
+    .list__item {
+      padding: .5em 1em;
+      list-style: none;
+      cursor: pointer;
+    }
+    .list__item:hover { background-color: rgba(238,238,238,.6); }
+
+
+    /* Article view */
+
+    article { padding-top: 2.5em; }
+
     .overlay {
       display: none;
       position: fixed;
@@ -41,11 +69,15 @@
 
     .overlay__content {
       overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
       height: 100%;
+      padding: 0 1em 1em;
     }
 
+    .title { padding-left: 1rem; }
+
     .button {
-      padding: .5em 1em;
+      padding: .25em .5em;
       text-decoration: none;
       color: #ccc;
       border: 1px solid #eee;
@@ -53,31 +85,32 @@
     }
 
     .button--back {
-      position: absolute;
+      position: fixed;
       top: 1em;
       left: 1em;
     }
 
-    .content-container {
-      max-width: 45em;
-      margin: 0 auto;
+    img,
+    iframe {
+      max-width: 100%;
+      height: auto;
     }
 
-    .list {
-      max-width: 800px;
-      margin: 0 auto;
-      padding-left: 0;
-    }
+    p { word-wrap: break-word; }
 
-    .list__item {
-      margin-bottom: .5em;
-      padding: 1em;
-      list-style: none;
-      cursor: pointer;
-    }
-    .list__item:hover { background-color: rgba(238,238,238,.6); }
+    pre { white-space: pre-wrap; }
 
-    .text-gray { color: #999; }
+
+    /* Desktop */
+
+    @media only screen and (min-width: 56em) {
+      article,
+      .overlay__content { padding: 0; }
+
+      .button { padding: .5em 1em; }
+
+      .list__item { padding: 1em; }
+    }
   </style>
 </head>
 
@@ -87,13 +120,13 @@
 <main>
 
   <div class="content-container">
-    <h1>Articles <span id="js-total-articles"></span></h1>
+    <h1 class="title">Articles <span id="js-total-articles"></span></h1>
     <ul id="js-list" class="list"></ul>
   </div>
 
   <div id="js-article" class="overlay">
-    <a href="#" class="button button--back" onclick="closeContent()">esc</a>
     <div class="overlay__content">
+      <a href="#" class="button button--back" onclick="closeContent()">esc</a>
       <article class="content-container">
         <h1 id="js-article-title"></h1>
         <h5 id="js-article-meta" class="text-gray"></h5>
@@ -151,6 +184,7 @@ function renderArticleList(data) {
 
 
 function closeContent() {
+  document.body.style.overflow = "initial";
   document.getElementById('js-article').style.display = 'none';
 }
 
@@ -181,6 +215,8 @@ function getArticle(id) {
   var meta = article.origin.title + ' &middot; <date>' + published.toDateString() + '</date> \
     &middot; <a href="?id=' + id + '">Permalink</a>';
 
+  document.body.style.overflow = "hidden"; // Better overlay scrolling
+
   document.getElementById('js-article').style.display = 'block';
   document.getElementById('js-article-title').innerHTML = '\
     <a href="' + source + '" target="_blank" rel="noopener">' + article.title + '</a>';
@@ -191,11 +227,8 @@ function getArticle(id) {
 
 document.onkeydown = function(e) {
   e = e || window.event;
-  if (e.keyCode == 27) {
-    closeContent();
-  }
+  if (e.keyCode == 27) closeContent();
 };
-
 </script>
 
 
