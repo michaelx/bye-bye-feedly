@@ -215,7 +215,7 @@ function getArticle(id) {
   var meta = article.origin.title + ' &middot; <date>' + published.toDateString() + '</date> \
     &middot; <a href="?id=' + id + '">Permalink</a>';
 
-  document.body.style.overflow = "hidden"; // Better overlay scrolling
+  document.body.style.overflow = 'hidden'; // Better overlay scrolling
 
   document.getElementById('js-article').style.display = 'block';
   document.getElementById('js-article-title').innerHTML = '\
