@@ -222,12 +222,30 @@ function getArticle(id) {
     <a href="' + source + '" target="_blank" rel="noopener">' + article.title + '</a>';
   document.getElementById('js-article-meta').innerHTML = meta;
   document.getElementById('js-article-content').innerHTML = text;
+
+  // Keyboard shortcuts: Article view
+  document.onkeydown = function(e) {
+    e = e || window.event;
+    // esc: close article
+    if (e.keyCode == 27) {
+      closeContent();
+    // k: newer article, back to article list on end
+    } else if (e.keyCode == 75 && id < data.items.length) {
+      id++;
+      id === data.items.length ? closeContent() : getArticle(id);
+    // j: older article, back to article list on end
+    } else if (e.keyCode == 74 && id >= 0) {
+      id--;
+      id < 0 ? closeContent() : getArticle(id);
+    }
+  };
 }
 
-
-document.onkeydown = function(e) {
+// Keyboard shortcuts: List view
+window.onkeydown = function(e) {
   e = e || window.event;
-  if (e.keyCode == 27) closeContent();
+  // o: open newest article
+  if (e.keyCode == 79) getArticle(data.items.length-1);
 };
 </script>
 

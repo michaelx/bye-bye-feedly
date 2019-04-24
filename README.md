@@ -16,6 +16,22 @@ I kept this minimal, and toolkit/dependency free. The reader has basic styling. 
 
 ![bye-bye-feedly Demo](https://i.imgur.com/zHcy4u7.gif)
 
+## Keyboard shortcuts
+
+**List view**
+
+Shortcut | Action
+:------- | :-----
+`o` | Open newest article
+
+**Article view**
+
+Shortcut | Action
+:------- | :-----
+`k` | Newer article, back to article list on end
+`j` | Older article, back to article list on end
+`esc` | Close article view
+
 ## Author
 
 * https://michaelxander.com
