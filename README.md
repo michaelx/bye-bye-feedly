@@ -7,7 +7,7 @@ I kept this minimal, and toolkit/dependency free. The reader has basic styling. 
 ## Prerequisites
 
 - [Python](https://www.python.org/downloads/) (most systems should have it by default)
-- [Requests](https://2.python-requests.org//en/master/user/install/) library for Python: Install globally with pip `pip install requests` or locally with [pipenv](http://pipenv.org) (`pipenv install requests`.
+- [Requests](https://2.python-requests.org//en/master/user/install/) library for Python: Install globally with pip (`pip install requests`) or locally with [pipenv](http://pipenv.org) (`pipenv install requests`).
 
 ## Setup and usage
 
